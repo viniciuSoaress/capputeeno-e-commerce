@@ -1,2 +1,7 @@
 export * from './Header'
 export * from './Product'
+export * from './ButtonContainer'
+export * from './Main'
+export * from './ShoopingCart'
+export * from './Button'
+export * from './Pro'

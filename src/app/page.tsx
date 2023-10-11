@@ -1,33 +1,49 @@
+'use client'
 
 import Link from "next/link"
-import { Header, Product } from "./components"
-import { allProducts } from './utils'
-
-
-async function getData() {
-  return allProducts
-}
+import { Header, Product, ButtonContainer, Main, ShoppingCart } from "./components"
+import { allProducts, searchProduct } from './utils'
+import { useProduct,useCont } from "./hooks"
 
 
 
-export default async function Home() {
 
-  const products = await getData()
+
+
+export default function Home() {
+
+  const {is, handleIsClick, product, handleDelete} = useCont()
+
+  const { name, handleNameChange, setName } = useProduct()
+
+
+  let prod = searchProduct(allProducts, name)
+
+  if (is) {
+    return (
+      <ShoppingCart product={product} onClick={handleIsClick} onDelete={handleDelete} />
+    )
+  }
+
+
   return (
-    <>
-      <Header />
+    <Main>
+      <Header onChange={handleNameChange} />
 
-      <main
-        className="flex min-h-screen flex-wrap items-center gap-8 px-20 py-36 bg-[#f0f0f5]"
+      <ButtonContainer state={setName} />
+
+      <div
+        className="flex min-h-screen max-w-[1440px] w-screen flex-wrap justify-center items-center gap-8 px-20 py-14 bg-[#f0f0f5] border-x"
       >
 
-        {products.map((product) => (
+        {prod.map((product) => (
           <Link href={`/${product.id}`} key={product.id}>
             <Product product={product} />
           </Link>
 
         ))}
-      </main>
-    </>
+
+      </div>
+    </Main>
   )
 }

@@ -1,17 +1,9 @@
+import { product } from "../types"
 import { formatePrice } from "../utils"
 
 
 type Props = {
-  product: {
-    name: string;
-    id: string;
-    price_in_cents: number;
-    description: string;
-    image_url: string;
-    created_at: string;
-    sales: number;
-    category: string;
-  }
+  product: product
 }
 
 
@@ -29,7 +21,7 @@ export function Product({
         className="rounded-t-lg"
       />
 
-      <div className="h-20 px-2 py-2 flex flex-col gap-2 bg-[#2a2a2a]">
+      <div className="h-20 px-2 py-2 flex flex-col gap-2 bg-[#fefefe] text-black">
         <p>{product.name}</p>
         <hr />
         <h3>{formatePrice(product.price_in_cents)}</h3>
